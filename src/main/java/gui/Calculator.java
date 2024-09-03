@@ -18,6 +18,11 @@ public class Calculator extends VBox implements EventHandler<ActionEvent>{
 	String number2 = "";
 	String operator;
 	Text displayText;
+
+	public void setText(String p){
+		this.displayText.setText(p);
+		
+	}
 	
 	public Calculator(){
 		super(10);
