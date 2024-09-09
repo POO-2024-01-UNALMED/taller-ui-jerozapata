@@ -54,7 +54,7 @@ public class Calculator extends VBox implements EventHandler<ActionEvent>{
 		b8.setPrefWidth(50);
 		b8.setOnAction(this);
 		
-		Button b9 = new Button(9);
+		Button b9 = new Button("9");
 		gd.add(b9, 2, 0);
 		b9.setPrefWidth(50);
 		b9.setOnAction(this);
@@ -62,7 +62,7 @@ public class Calculator extends VBox implements EventHandler<ActionEvent>{
 		Button div = new Button("/");
 		gd.add(div, 3, 0);
 		div.setPrefWidth(50);
-		div.setOnAction(***);
+		div.setOnAction(this);
 		
 		Button b4 = new Button("4");
 		gd.add(b4, 0, 1);
@@ -132,6 +132,17 @@ public class Calculator extends VBox implements EventHandler<ActionEvent>{
 		
 		Button b = (Button) event.getSource();
 		String value = b.getText();
+
+		if (!value.equals("C") && !value.equals("=")) {
+			String mostrado = displayText.getText();
+			displayText.setText(mostrado + value);
+		  }
+		  else if (value.equals("C")) {
+			displayText.setText("");
+		  }
+		  else {
+			String mostrado = displayText.getText();
+	  
 		
 		if (mostrado.contains("+")) {
 			String[] numeros = mostrado.split("\\+");
@@ -166,9 +177,12 @@ public class Calculator extends VBox implements EventHandler<ActionEvent>{
 			} 
 			
 			else {
-			  displayText.setText("No se puede dividir entre 0");
-			  
-	      }
-	    }
-	  }
+				displayText.setText("No se puede dividir entre 0");
+			}
+		  }
+		}
 	}
+}
+
+
+
