@@ -133,83 +133,42 @@ public class Calculator extends VBox implements EventHandler<ActionEvent>{
 		Button b = (Button) event.getSource();
 		String value = b.getText();
 		
-		System.out.println(displayText.getText());
-		
-		if(displayText.getText()=="Error") {
-        	number1 ="";
-        	number2 = "";
-            operator = "";
-	}
-		if ("0123456789".contains(value)) {
-	        if (operator =="") {
-	            number1 += value;
-	            setText(number1+operator+number2); 
-	        } 
+		if (mostrado.contains("+")) {
+			String[] numeros = mostrado.split("\\+");
+			number1 = numeros[0]; number2 = numeros[1];
+			int resultado = Integer.parseInt(number1) + Integer.parseInt(number2);
+			displayText.setText(String.valueOf(resultado));
+		  } 
+		  
+		  else if (mostrado.contains("-")) {
+			String[] numeros = mostrado.split("-");
+			number1 = numeros[0]; number2 = numeros[1];
+			int resultado = Integer.parseInt(number1) - Integer.parseInt(number2);
+			displayText.setText(String.valueOf(resultado));
+		  } 
+		  
+		  else if (mostrado.contains("*")) {
+			String[] numeros = mostrado.split("\\*");
+			number1 = numeros[0]; number2 = numeros[1];
+			int resultado = Integer.parseInt(number1) * Integer.parseInt(number2);
+			displayText.setText(String.valueOf(resultado));
+		  } 
+		  
+		  else if (mostrado.contains("/")) {
+			String[] numeros = mostrado.split("/");
+			number1 = numeros[0]; number2 = numeros[1];
 
+			
+			if (!number2.equals("0")) {
+			  int resultado = Integer.parseInt(number1) / Integer.parseInt(number2);
+			  displayText.setText(String.valueOf(resultado));
+
+			} 
+			
 			else {
-	            number2 += value;
-	            setText(number1+operator+number2); 
-	        }
-	    } 
-
-	    else if ("+-*/".contains(value)) {
-	    	if(number1!="") {
-	        operator = value;
-	        setText(number1+operator+number2);
-	    	}
-	    } 
-
-	    else if ("=".equals(value)) {
-	        if (!number1.isEmpty() && !number2.isEmpty()) {
-	            double num1 = Double.parseDouble(number1);
-	            double num2 = Double.parseDouble(number2);
-	            double result = 0;
-
-	            switch (operator) {
-	                case "+":
-	                    result = num1 + num2;
-	                    break;
-	                case "-":
-	                    result = num1 - num2;
-	                    break;
-	                case "*":
-	                    result = num1 * num2;
-	                    break;
-	                case "/":
-	                    if (num2 != 0) {
-	                        result = num1 / num2;
-	                    } 
-						
-						else {
-	                        setText("Error"); 
-	                        return;
-	                    }
-
-	                    break;
-	            }
-
-	            int resulta=0;
-	            if (result == Math.floor(result)) {
-	                resulta=(int) result;
-	                setText(String.valueOf(resulta));
-	                number1 = String.valueOf(resulta);
-	            }
-
-	            else {
-	            	setText(String.valueOf(result));
-	            	number1 = String.valueOf(result);
-	            }
-	            
-	            number2 = "";
-	            operator = "";
-	        }
-	    } 
-	
-	    else if ("C".equals(value)) {
-	        number1 = "";
-	        number2 = "";
-	        operator = "";
-	        setText(""); 
-	    }	
+			  displayText.setText("No se puede dividir entre 0");
+			  
+	      }
+	    }
+	  }
 	}
-}
